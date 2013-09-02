@@ -1,0 +1,9 @@
+{
+    "name": "JEX API",
+    "description": "JEX is a light weight UI library for Anjuke KFS team.",
+    "version": "0.1.0",
+    "url": "https://github.com/s0ngyee/jex",
+    "options": {
+        "outdir": "../build/docs"
+    }
+}
