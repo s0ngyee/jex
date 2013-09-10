@@ -1,0 +1,68 @@
+.pull-down-menu {
+    width:115px;
+    position: relative;
+    overflow: visible;
+}
+-down-menu .menu-inp {
+    display:block;
+    height: 26px;
+    width:115px;
+    overflow: hidden;
+    zoom:1;
+}
+.pull-down-menu .menu-inp input {
+    float: left;
+    width: 79px;
+    border:1px solid #ABADB3;
+    height:24px;
+    line-height:24px;
+    border-width: 1px 0 1px 1px;
+    font-size: 14px;
+    padding: 0 0 0 9px;
+}
+.pull-down-menu .menu-inp .pull-down-arrow {
+    float:left;
+    display: inline-block;
+    width:21px;
+    height: 26px;
+    background: url("<?=$PATH_URL.'/icon_sprites.png'?>") no-repeat 0 -40px;
+    cursor: pointer;
+}
+.pull-menu-list {
+    position: absolute;
+    top:26px;left: 0;
+    width: 108px;
+    background:#FFF;
+    border: 1px solid #ABADB3;
+    border-width: 0 1px 1px;
+    z-index: 100;
+}
+.pull-menu-list li {
+    height: 26px;
+    line-height:26px;
+    margin: 0;
+    padding: 0 0 0 8px;
+    zoom: 1;
+    vertical-align:bottom;
+}
+.pull-menu-list li:hover {
+    background: #517BAF;
+    color:#FFF;
+    cursor: default;
+}
+.pull-menu-list .curr-menu-li {
+    background: #517BAF;
+    color:#FFF;
+}
+.scroll-show {
+    overflow-y:scroll;
+    overflow-x:none;
+}
+.limit-h1 {
+    height: 158px;
+    max-height:158px;
+}
+.limit-h2 {
+    height: 315px;
+    max-height: 315px;
+}

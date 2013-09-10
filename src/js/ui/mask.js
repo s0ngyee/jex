@@ -1,28 +1,60 @@
 /**
- * Created with IntelliJ IDEA.
- * User: bsy
- * Date: 13-8-3
- * Time: 上午12:51
- * To change this template use File | Settings | File Templates.
+ * JEX ui.mask
+ *
+ * @module ui
+ * @submodule mask
+ * @namespace J.EX.ui.mask
+ * @author songyee
+ * @since 0.1.0
  */
 ;(function(J) {
     /**
      * MaskBase
      * @constructor
+     * @extends J.EX.ui.base
      */
     function MaskBase() {
+
+        /**
+         * @config defOpts
+         * @type Object
+         * @param {Object} defOpts.elModal Mask's modal element
+         * @param {Number} defOpts.zidx Mask z-index property
+         * @param {String} defOpts.tpl Mask element template
+         */
         var defOpts = {
-            modal: '',
+            elModal: null,
             zidx: 9999,
-            tpl: '<div id="mask" style="display:none;background-color: rgb(0, 0, 0);width: 100%; position: absolute;opacity: 0.5;z-index: {$zidx};"></div>'
+            tpl: '<div id="mask" style="display: none;background-color: rgb(0, 0, 0);width: 100%;position: absolute;opacity: 0.5;z-index: {$zidx};"></div>'
         };
 
         var a = arguments,
             o = a[0] || {},
             opts = J.mix(defOpts, o),
             self = this;
-        this.modal = opts.modal;
+
+        /**
+         * Mask modal element
+         *
+         * @property elModal
+         * @type {Object|null}
+         */
+        this.elModal = opts.elModal;
+
+        /**
+         * Mask z-index
+         *
+         * @property elModal
+         * @type {Number}
+         */
         this.zidx = opts.modal.zidx ? opts.modal.zidx - 1 : opts.zidx;
+
+        /**
+         * Mask tpl
+         *
+         * @property tpl
+         * @type {String}
+         */
         this.tpl = opts.tpl.replace(/\{\$zidx\}/, opts.zidx);
 
         MaskBase.superclass.constructor.call(this, opts);

@@ -1,15 +1,20 @@
-/**
- * Created with IntelliJ IDEA.
- * User: bsy
- * Date: 13-8-3
- * Time: 上午1:10
- * To change this template use File | Settings | File Templates.
- */
-
 ;(function(J) {
 
     /**
+     <div id="house_type" class="pull-down-menu">
+     <span class="menu-inp">
+     <input type="text" name="house_type_txt" value="选择户型"/>
+     <input type="hidden" name="house_type_val" value="<?=$value['housetype_id']?>" imgs="<?=$value['imgs']?>" id="housetype_id"/>
+     <em class="pull-down-arrow"></em>
+     </span>
+     <ul class="pull-menu-list" style="display:none;">
+     </ul>
+     </div>
+     */
+
+    /**
      * Combobox
+     *
      * @constructor
      */
     function Combobox() {
@@ -23,6 +28,7 @@
             opts = J.mix(defOpts, o),
             self = this;
         Combobox.superclass.constructor.call(this, opts);
+
 
         this.elMnu = J.s('.menu-inp', self.el[0]).eq(0);
         this.elList = J.s('.pull-menu-list', self.el[0]).eq(0);

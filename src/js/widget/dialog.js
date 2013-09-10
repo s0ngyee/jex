@@ -7,54 +7,6 @@
  */
 ;(function(J) {
 
-
-    /**
-     * FieldBase
-     * @constructor
-     */
-    function FieldBase() {
-        var defOpts = {
-            label: '',
-            required: false,
-            comps: []
-        };
-
-        var a = arguments,
-            o = a[0] || {},
-            opts = J.mix(defOpts, o),
-            self = this;
-        FieldBase.superclass.constructor.call(this, opts);
-    }
-
-    J.EX.inherit(FieldBase, J.EX.widget.base);
-
-    J.mix(J.EX.widget, {
-        field: FieldBase
-    });
-
-    /**
-     * FormBase
-     * @constructor
-     */
-    function FormBase() {
-        var defOpts = {
-
-        };
-
-        var a = arguments,
-            o = a[0] || {},
-            opts = J.mix(defOpts, o),
-            self = this;
-        FormBase.superclass.constructor.call(this, opts);
-    }
-
-    J.EX.inherit(FormBase, J.EX.widget.base);
-
-    J.mix(J.EX.widget, {
-        form: FormBase
-    });
-
-
     /**
      * DialogBase
      * @constructor

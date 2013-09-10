@@ -1,144 +1,226 @@
+/**
+ * JEX ui.combobox
+ *
+ * @module ui
+ * @submodule combobox
+ * @namespace J.EX.ui.combobox
+ * @author songyee
+ * @since 0.1.0
+ */
 ;(function(J) {
 
     /**
-     * VIP ui package
-     */
-    J.EX.namespace('J.EX.ui.VIP');
-
-    J.EX.namespace('J.dom.fn.vip');
-
-    /**
-     * Combobox
+     * ComboboxBase
      * @constructor
+     * @extends J.EX.ui.base
      */
-    function Combobox() {
+    function ComboboxBase() {
 
+        /**
+         * @config defOpts
+         * @type Object
+         * @param {String} defOpts.title Combobox title
+         * @param {Number} defOpts.val Combobox value
+         * @param {Array} defOpts.ds Combobox data store
+         * @param {String} defOpts.itm_t Item template
+         * @param {String} defOpts.itm_kp Item key prefix
+         * @param {String} defOpts.itm_ks Item key suffix
+         * @param {Mixed} defOpts.itm_dk Item default key
+         * @param {Number} defOpts.ddn Dropdown display num
+         * @param {Boolean} defOpts.enable Combobox enable flag
+         * @event onSelect
+         * @event onRefresh
+         */
         var defOpts = {
-            ti: '<li data-value="{$value}">{$key}</li>'
+            title: '',
+            val: 0,
+            ds: [],
+            itm_t: '',
+            itm_kp: '',
+            itm_ks: '',
+            itm_dk: '',
+            ddn: 10,
+            enable: true,
+            onSelect: null,
+            onRefresh:null
         };
 
         var a = arguments,
             o = a[0] || {},
             opts = J.mix(defOpts, o),
             self = this;
-        Combobox.superclass.constructor.call(this, opts);
 
-        this.elMnu = J.s('.menu-inp', self.el[0]).eq(0);
-        this.elList = J.s('.pull-menu-list', self.el[0]).eq(0);
-        this.elTxt = J.s('[name=' + self.elId+'_txt]', self.el[0]).eq(0);
-        this.elVal = J.s('[name=' + self.elId+'_val]', self.el[0]).eq(0);
+        /**
+         * Combobox title
+         *
+         * @property title
+         * @type String
+         */
+        this.title = opts.title;
 
-        var init = function() {
-            self.refresh();
+        /**
+         * Combobox value
+         *
+         * @property val
+         * @type Number
+         */
+        this.val = opts.val;
 
-            /**
-             * show drop down list
-             */
-            self.elMnu.on('click', function(){
-                if(self.enable) {
-                    self.isExpand = !self.isExpand;
-                    self.isExpand ? self.elList.show() : self.elList.hide();
-                }
-            });
+        /**
+         * Data store
+         *
+         * @property ds
+         * @type Array
+         */
+        this.ds = opts.ds;
 
-            /**
-             * drop down list hide
-             */
-            J.g(J.D).on('mousedown', function(evt){
-                var evt = evt || window.event,
-                    el = evt.srcTarget || evt.srcElement;
-                if (self.isExpand == true && !J.EX.dom.contains(self.el[0], el)) {
-                    self.elList.hide();
-                    self.isExpand = false;
-                }
-            });
-        };
+        /**
+         * Item template
+         *
+         * @property itm_t
+         * @type String
+         */
+        this.itm_t = opts.itm_t;
 
-        init();
+        /**
+         * Item key prefix
+         *
+         * @property itm_kp
+         * @type String
+         */
+        this.itm_kp = opts.itm_kp;
+
+        /**
+         * Item key suffix
+         *
+         * @property title
+         * @type String
+         */
+        this.itm_ks =  opts.itm_ks;
+
+        /**
+         * Item default key
+         *
+         * @property itm_dk
+         * @type String
+         */
+        this.itm_dk = opts.itm_dk ? opts.itm_dk : opts.title;
+
+        /**
+         * Combobox status
+         *
+         * @property enable
+         * @type Boolean
+         */
+        this.enable = opts.enable;
+
+        /**
+         * Dropdown display number
+         *
+         * @property title
+         * @type String
+         */
+        this.ddn = opts.ddn;
+
+        /**
+         * Expand flag
+         *
+         * @private
+         * @property isExpand
+         * @type String
+         */
+        this.isExpand = false;
+
+        /**
+         * Selected item
+         *
+         * @property si
+         * @type Object
+         */
+        this.si = null;
+
+        /**
+         * Combobox select event
+         *
+         * @event onSelect
+         */
+        this.onSelect = opts.onSelect;
+
+        /**
+         * Combobox refresh event
+         *
+         * @event onRefresh
+         */
+        this.onRefresh = opts.onRefresh;
+
+        ComboboxBase.superclass.constructor.call(this, opts);
     }
 
-    Combobox.prototype = {
-        refresh: function() {
-            Combobox.superclass.refresh.call(this);
-            var self = this,
-                itmHtml = '<li data-value="-1">' + this.idk + '</li>';
-
-            /**
-             * show scroll bar
-             */
-            if(this.ds.length > self.mxsn) {
-                this.elList.addClass('scroll-show');
+    ComboboxBase.prototype = {
+        /**
+         * @method setEnable
+         * @param flag
+         */
+        setEnable: function(flag) {
+            this.enable = flag;
+            if(!flag) {
+                this.reset();
             }
-
-            /**
-             * append item
-             */
+        },
+        /**
+         * Add item dynamic
+         * @method add
+         * @param item
+         */
+        add: function(item) {
+            this.ds.push(item);
+            this.refresh();
+        },
+        /**
+         * Select item
+         * @method select
+         * @param val
+         */
+        select: function(val) {
+            var key, si;
             this.ds.each(function(o, i){
-                var key;
-                if (typeof o == 'object') {
-                    key = o.length > 1 ? o[1] : o[0];
-                    key = self.ikp + key + self.iks;
-                    itmHtml += self.ti.replace(/\{\$value\}/, o[0])
-                        .replace(/\{\$key\}/, key);
-                } else {
-                    key = self.ikp + o + self.iks;
-                    itmHtml += self.ti.replace(/\{\$value\}/, o)
-                        .replace(/\{\$key\}/, key);
+                if(o[0] == val) {
+                    key = o[1];
+                    si = o;
                 }
             });
-            this.elList.html(itmHtml);
-
-            /**
-             * select item
-             */
-            var elItems = J.s('ul > li', self.el[0]);
-            elItems.each(function(i, o){
-                (function(){
-                    J.g(o).on('click', function(){
-                        var el = J.g(o),
-                            key = el.html(),
-                            val = el.attr('data-value');
-                        self.isExpand = false;
-                        self.val = val;
-                        self.elTxt.val(key);
-                        self.elVal.val(val);
-                        self.elList.hide();
-                        /**
-                         * set current ds
-                         */
-                        self.ds.each(function(o){
-                            if(typeof o == 'object') {
-                                if(o[0] == val) {
-                                    self.si = o;
-                                }
-                            } else {
-                                if(o == val) {
-                                    self.si = o;
-                                }
-                            }
-                        });
-                        if(self.onselect) {
-                            self.onselect.call(self);
-                        }
-                    })
-                })()
-            });
+            this.si = si;
         },
-        reset: function(){
-            Combobox.superclass.reset.call(this);
-            this.elTxt.val(this.idk);
-            this.elVal.val('');
+        /**
+         * Combobox reload data
+         * @method reload
+         * @param data
+         */
+        reload: function(data) {
+            this.ds = data;
+            this.refresh();
+        },
+        /**
+         * Refresh combobox
+         * @method refresh
+         */
+        refresh: function() {
+
+        },
+        /**
+         * Reset combobox
+         * @method reset
+         */
+        reset: function() {
+            this.isExpand = false;
         }
     };
 
-    J.EX.inherit(Combobox, J.EX.ui.combobox);
+    J.EX.inherit(ComboboxBase, J.EX.ui.base);
 
-    J.mix(J.EX.ui.VIP, {
-        combobox: Combobox
+    J.mix(J.EX.ui, {
+        combobox: ComboboxBase
     });
 
-    J.dom.fn.vip.combobox = function(o) {
-        return new Combobox(o);
-    }
-
 })(J);
+

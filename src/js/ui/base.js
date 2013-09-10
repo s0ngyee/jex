@@ -1,25 +1,36 @@
 /**
  * JEX ui
  *
- * @path: ui/base.js
- * @author: songyee
- * @date: 2013/08/14
- * @version: 0.1.0
+ * @module ui
+ * @submodule base
+ * @namespace J.EX.ui.base
+ * @author songyee
+ * @since 0.1.0
  */
 ;(function(J) {
 
     /**
      * ui base package
+     * @namespace J.EX.ui
      */
     J.EX.namespace('J.EX.ui');
 
     /**
-     * uiBase
+     * UIBase
+     *
+     * @class UIBase
      * @constructor
+     *
      */
     function UIBase() {
+        /**
+         *
+         * @config defOpts
+         * @type Object
+         * @param el {Object} [] defOpts.el
+         */
         var defOpts = {
-            el: ''
+            el: {}
         };
 
         var a = arguments,
@@ -28,11 +39,28 @@
             opts = J.mix(defOpts, o),
             self = this;
 
+        /**
+         * UI object container id
+         *
+         * @property elId
+         * @type String
+         */
         this.elId = opts.elId;
+
+        /**
+         * UI object container object
+         * @property el
+         * @type Object
+         */
         this.el = opts.elId ? J.g(opts.elId) : '';
     }
 
     UIBase.prototype = {
+        /**
+         * UI object validate function
+         *
+         * @method validate
+         */
         validate: function(){
 
         }

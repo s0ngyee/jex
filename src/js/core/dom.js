@@ -1,17 +1,23 @@
 /**
  *
- * @path: core/dom.js
- * @author: songyee
- * @date: 2013/08/14
- * @version: 0.1.0
+ * @module core
+ * @submodule dom
+ * @author songyee
+ * @since 0.1.0
  */
 ;(function(J) {
-    J.EX.namespace('J.EX.dom');
     /**
-     * @desc check if the root element contains the el
-     * @param root
-     * @param el
-     * @returns {*}
+     * @namespace J.EX.dom
+     */
+    J.EX.namespace('J.EX.dom');
+
+    /**
+     * check if the root element contains the el
+     *
+     * @method contains
+     * @param {Node} root
+     * @param {Node} el
+     * @returns {Boolean}
      */
     function contains (root, el) {
         if (root.compareDocumentPosition)
@@ -25,8 +31,10 @@
     }
 
     /**
-     * @desc convert html string to js dom objects
-     * @param str
+     * convert html string to js dom objects
+     *
+     * @method parseDOM
+     * @param {String} str
      * @returns {NodeList}
      */
     function parseDOM(str) {

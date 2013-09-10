@@ -1,16 +1,21 @@
 /**
  *
- * @path: core/fn.js
- * @author: songyee
- * @date: 2013/08/14
- * @version: 0.1.0
+ * @module core
+ * @submodule fn
+ * @author songyee
+ * @since 0.1.0
  */
 ;(function(J) {
+    /**
+     * @namespace J.EX.fn
+     */
     J.EX.namespace('J.EX.fn');
 
     /**
-     * @desc currying function
-     * @returns {Function}
+     * currying function
+     *
+     * @method currying
+     * @return {Function}
      */
     function currying() {
         var fn = this;

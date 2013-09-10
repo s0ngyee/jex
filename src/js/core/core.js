@@ -6,20 +6,23 @@
  * Currently the basic operation for dom is based on JockJS.
  *
  * @module core
+ * @submodule core
+ * @main EX
+ * @author songyee
  * @since 0.1.0
- *
  */
 ;(function(J) {
     /**
      * define library's host
+     * @namespace J.EX
      */
     var H = J.EX = J.EX || {};
 
     /**
-     * @desc namespace for javascript
-     * @borrows YUI3
+     * Namespace for javascript
+     *
      * @method namespace
-     * @return {Object} Reference to the namespace object created.
+     * @return {Object} Reference to the namespace object created
      */
     function namespace() {
         var a = arguments, ns = a[0] || 'K', h = a[1] || J, DS = a[3] || '.',
@@ -47,7 +50,10 @@
     J.namespace = J.EX.namespace;
 
     /**
-     * @desc define empty function
+     * Define empty function
+     *
+     * @class Empty
+     * @constructor
      */
     function Empty() {
 
@@ -57,15 +63,16 @@
         empty: Empty
     });
 
-    /**
-     * @desc create an object
-     * @borrows kissy
-     * @param proto
-     * @param constructor
-     * @returns {*}
-     */
     var ObjectCreate = Object.create;
 
+    /**
+     * Create an object
+     *
+     * @method createObject
+     * @param {Object} proto
+     * @param {constructor} constructor
+     * @returns {Object} newProto
+     */
     function createObject(proto, constructor) {
         var newProto;
         if (ObjectCreate) {
@@ -79,13 +86,14 @@
     }
 
     /**
-     * @desc class inherit
-     * @borrows kissy
-     * @param r {Function} the object to modify
-     * @param s {Function} the object to inherit
+     * Class inherit
+     *
+     * @method inherit
+     * @param {Function} r the object to modify
+     * @param {Function} s the object to inherit
      * @param {Object} [px] prototype properties to add/override
      * @param {Object} [sx] static properties to add/override
-     * @return r {Object}
+     * @return {Object} r
      */
     function inherit(r, s, px, sx) {
         if (!s || !r) {
@@ -117,8 +125,10 @@
     J.inherit = J.EX.inherit;
 
     /**
-     * @desc singleton design pattern
-     * @param fn
+     * Singleton design pattern
+     *
+     * @method singleton
+     * @param {Function} fn
      * @returns {Function}
      */
     function singleton(fn) {
