@@ -1,13 +1,11 @@
 /**
- * Created with IntelliJ IDEA.
- * User: bsy
- * Date: 13-8-3
- * Time: 上午1:09
- * To change this template use File | Settings | File Templates.
- */
-
-/**
- * J widget
+ * JEX widget
+ *
+ * @module widget
+ * @submodule base
+ * @namespace J.EX.widget.base
+ * @author songyee
+ * @since 0.1.0
  */
 ;(function(J) {
 
@@ -34,15 +32,6 @@
         this.elId = opts.elId;
         this.el = J.g(this.elId);
     }
-
-    WidgetBase.prototype = {
-        _bind: function() {
-
-        },
-        validate: function(){
-            //console.log('###### uiBase validate #####');
-        }
-    };
 
     J.mix(J.EX.widget, {
         base: WidgetBase

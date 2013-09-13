@@ -76,21 +76,33 @@
     }
 
     MaskBase.prototype = {
+        /**
+         * Show mask
+         * @method refresh
+         */
         show: function() {
             this.el.show();
         },
+        /**
+         * Hide mask
+         * @method refresh
+         */
         hide: function() {
             this.el.hide();
         },
+        /**
+         * Remove mask
+         * @method refresh
+         */
         remove: function() {
             this.el.remove();
-            if(this.modal) {
-                this.modal.remove();
+            if(this.elModal) {
+                this.elModal.remove();
             }
         }
     }
 
-    J.EX.inherit(MaskBase, UIBase);
+    J.EX.inherit(MaskBase, J.EX.ui.base);
 
     J.mix(J.EX.ui, {
         mask: MaskBase

@@ -1,9 +1,11 @@
 /**
- * Created with IntelliJ IDEA.
- * User: bsy
- * Date: 13-8-3
- * Time: 上午1:27
- * To change this template use File | Settings | File Templates.
+ * JEX widget.VIP.floorprice
+ *
+ * @module widget
+ * @submodule floorprice
+ * @namespace J.EX.VIP.widget.floorprice
+ * @author songyee
+ * @since 0.1.0
  */
 ;(function(J) {
 

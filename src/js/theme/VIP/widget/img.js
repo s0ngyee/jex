@@ -1,7 +1,9 @@
 /**
- * Created with IntelliJ IDEA.
- * User: bsy
- * Date: 13-8-14
- * Time: 下午1:35
- * To change this template use File | Settings | File Templates.
+ * JEX widget.VIP.img
+ *
+ * @module widget
+ * @submodule img
+ * @namespace J.EX.VIP.widget.img
+ * @author songyee
+ * @since 0.1.0
  */

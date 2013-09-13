@@ -1,9 +1,11 @@
 /**
- * Created with IntelliJ IDEA.
- * User: bsy
- * Date: 13-8-3
- * Time: 上午1:17
- * To change this template use File | Settings | File Templates.
+ * JEX widget
+ *
+ * @module widget
+ * @submodule uploader
+ * @namespace J.EX.widget.uploader
+ * @author songyee
+ * @since 0.1.0
  */
 ;(function(J) {
 

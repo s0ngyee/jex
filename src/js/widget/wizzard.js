@@ -1,3 +1,12 @@
+/**
+ * JEX widget
+ *
+ * @module widget
+ * @submodule wizzard
+ * @namespace J.EX.widget.wizzard
+ * @author songyee
+ * @since 0.1.0
+ */
 ;(function(J) {
     /**
      * WizzardBase

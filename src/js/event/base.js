@@ -1,9 +1,9 @@
 /**
- * JEX anim
+ * JEX event
  *
- * @module anim
+ * @module event
  * @submodule base
- * @namespace J.EX.anim.base
+ * @namespace J.EX.event.base
  * @author songyee
  * @since 0.1.0
  */

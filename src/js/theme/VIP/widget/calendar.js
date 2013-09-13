@@ -1,9 +1,11 @@
 /**
- * Created with IntelliJ IDEA.
- * User: bsy
- * Date: 13-8-3
- * Time: 上午1:27
- * To change this template use File | Settings | File Templates.
+ * JEX widget.calendar
+ *
+ * @module widget
+ * @submodule calendar
+ * @namespace J.EX.widget.VIP.calendar
+ * @author songyee
+ * @since 0.1.0
  */
 ;(function(J) {
 
